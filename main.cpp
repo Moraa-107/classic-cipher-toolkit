@@ -1,54 +1,91 @@
 #include <iostream>
 #include <string>
+#include <limits>
 #include "caesar.h"
+#include "vigenere.h"
+
 using namespace std;
 
 int main()
 {
-    cout << "Classic Cipher Toolkit" << endl;
-    cout << "Choose the cipher you want to use:" << endl;
-    cout << "1. Caesar Cipher" << endl;
-    cout << "2. Vigenere Cipher" << endl;
-    cout << "3. Playfair Cipher" << endl;
-    cout << "4. Caesar Brute Force" << endl;
-    cout << "5. Exit" << endl;
-    cout << "___________________" << endl;
-
-    int choice;
-    cin >> choice;
-
-    switch (choice)
+    while (true)
     {
-    case 1:
-    {
-        string option;
-        cout << "Encrypt or Decrypt?" << endl;
-        cin >> option;
+        cout << "\n===========================" << endl;
+        cout << "  Classic Cipher Toolkit   " << endl;
+        cout << "===========================" << endl;
+        cout << "1. Caesar Cipher" << endl;
+        cout << "2. Vigenere Cipher" << endl;
+        cout << "3. Playfair Cipher (Coming Soon)" << endl;
+        cout << "4. Caesar Brute Force (Coming Soon)" << endl;
+        cout << "5. Exit" << endl;
+        cout << "___________________________" << endl;
+        cout << "Choice: ";
 
-        if (option == "Encrypt" || option == "encrypt")
+        int choice;
+        cin >> choice;
+
+        if (choice == 5)
         {
-            string plaintext;
+            cout << "Exiting toolkit. Goodbye!" << endl;
+            break;
+        }
+
+        switch (choice)
+        {
+        case 1:
+        {
+            string option;
+            cout << "Encrypt or Decrypt? (e/d): ";
+            cin >> option;
+
             int shift;
-            cout << "Enter the text you want to encrypt: ";
-            cin >> plaintext;
+            string text;
+
             cout << "Enter the shift value: ";
             cin >> shift;
-            string encrypted_text = encrypt(plaintext, shift);
-            cout << "Encrypted Text: " << encrypted_text << endl;
+
+            cout << "Enter the text: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline from buffer
+            getline(cin, text);                                  // Reads the whole sentence with spaces
+
+            if (option == "Encrypt" || option == "encrypt" || option == "e")
+            {
+                cout << "\n[RESULT] Encrypted Text: " << encrypt(text, shift) << endl;
+            }
+            else if (option == "Decrypt" || option == "decrypt" || option == "d")
+            {
+                cout << "\n[RESULT] Decrypted Text: " << decrypt(text, shift) << endl;
+            }
+            break;
         }
-        else if (option == "Decrypt" || option == "decrypt")
+        case 2:
         {
-            string ciphertext;
-            int shift;
-            cout << "Enter the text you want to decrypt: ";
-            cin >> ciphertext;
-            cout << "Enter the shift value: ";
-            cin >> shift;
-            string decrypted_text = decrypt(ciphertext, shift);
-            cout << "Decrypted Text: " << decrypted_text << endl;
+            string option;
+            cout << "Encrypt or Decrypt? (e/d): ";
+            cin >> option;
+
+            string key, text;
+
+            cout << "Enter the keyword: ";
+            cin >> key;
+
+            cout << "Enter the text: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline from buffer
+            getline(cin, text);
+
+            if (option == "Encrypt" || option == "encrypt" || option == "e")
+            {
+                cout << "\n[RESULT] Encrypted Text: " << encryptVigenere(text, key) << endl;
+            }
+            else if (option == "Decrypt" || option == "decrypt" || option == "d")
+            {
+                cout << "\n[RESULT] Decrypted Text: " << decryptVigenere(text, key) << endl;
+            }
+            break;
         }
-        break;
-    }
+        default:
+            cout << "Feature not fully implemented yet or invalid choice." << endl;
+        }
     }
 
     return 0;
