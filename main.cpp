@@ -25,7 +25,7 @@ int main()
         cout << "Encrypt or Decrypt?" << endl;
         cin >> option;
 
-        if (option == "Encrypt" || option == "encrypt")
+        if (option == "Encrypt" || option == "encrypt" || option == "e" || option == "Enc" || option == "enc" || option == "Enc")
         {
             string plaintext;
             int shift;
@@ -36,7 +36,7 @@ int main()
             string encrypted_text = encrypt(plaintext, shift);
             cout << "Encrypted Text: " << encrypted_text << endl;
         }
-        else if (option == "Decrypt" || option == "decrypt")
+        else if (option == "Decrypt" || option == "decrypt" || option == "dec" || option == "Dec"  || option == "d" || option == "D"  )
         {
             string ciphertext;
             int shift;
