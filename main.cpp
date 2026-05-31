@@ -3,6 +3,7 @@
 #include <limits>
 #include "caesar.h"
 #include "vigenere.h"
+#include "brute_force.h"
 
 using namespace std;
 
@@ -11,12 +12,12 @@ int main()
     while (true)
     {
         cout << "\n===========================" << endl;
-        cout << "  Classic Cipher Toolkit   " << endl;
+        cout << "  Classic Cipher Toolkit  " << endl;
         cout << "===========================" << endl;
         cout << "1. Caesar Cipher" << endl;
         cout << "2. Vigenere Cipher" << endl;
         cout << "3. Playfair Cipher (Coming Soon)" << endl;
-        cout << "4. Caesar Brute Force (Coming Soon)" << endl;
+        cout << "4. Caesar Brute Force" << endl;
         cout << "5. Exit" << endl;
         cout << "___________________________" << endl;
         cout << "Choice: ";
@@ -83,6 +84,18 @@ int main()
             }
             break;
         }
+        case 4:
+        {
+            string text;
+            cout << "Enter the encrypted text to Brute Force: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getline(cin, text);
+
+            cout << "\n--- Running Caesar Brute Force Attack ---" << endl;
+            caesarBruteForce(text);
+            break;
+        }
+
         default:
             cout << "Feature not fully implemented yet or invalid choice." << endl;
         }
