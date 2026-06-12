@@ -3,6 +3,7 @@
 #include <limits>
 #include "caesar.h"
 #include "vigenere.h"
+#include "rail_fence.h"
 #include "brute_force.h"
 
 using namespace std;
@@ -16,7 +17,7 @@ int main()
         cout << "===========================" << endl;
         cout << "1. Caesar Cipher" << endl;
         cout << "2. Vigenere Cipher" << endl;
-        cout << "3. Playfair Cipher (Coming Soon)" << endl;
+        cout << "3. Rail Fence Cipher" << endl;
         cout << "4. Caesar Brute Force" << endl;
         cout << "5. Exit" << endl;
         cout << "___________________________" << endl;
@@ -81,6 +82,31 @@ int main()
             else if (option == "Decrypt" || option == "decrypt" || option == "d")
             {
                 cout << "\n[RESULT] Decrypted Text: " << decryptVigenere(text, key) << endl;
+            }
+            break;
+        }
+        case 3:
+        {
+            string option;
+            cout << "Encrypt or Decrypt? (e/d): ";
+            cin >> option;
+
+            int rails;
+            cout << "Enter the number of rails: ";
+            cin >> rails;
+
+            string text;
+            cout << "Enter the text: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getline(cin, text);
+
+            if (option == "Encrypt" || option == "encrypt" || option == "e")
+            {
+                cout << "\n[RESULT] Encrypted Text: " << encryptRailFence(text, rails) << endl;
+            }
+            else if (option == "Decrypt" || option == "decrypt" || option == "d")
+            {
+                cout << "\n[RESULT] Decrypted Text: " << decryptRailFence(text, rails) << endl;
             }
             break;
         }
